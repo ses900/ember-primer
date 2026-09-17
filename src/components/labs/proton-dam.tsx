@@ -14,9 +14,15 @@ export function ProtonDamLab() {
   const synRef = useRef(true);
   const sim = useRef({ protons: 6, atp: 0 });
 
-  useEffect(() => { pumpRef.current = pumping; }, [pumping]);
-  useEffect(() => { leakRef.current = leaking; }, [leaking]);
-  useEffect(() => { synRef.current = synthase; }, [synthase]);
+  useEffect(() => {
+    pumpRef.current = pumping;
+  }, [pumping]);
+  useEffect(() => {
+    leakRef.current = leaking;
+  }, [leaking]);
+  useEffect(() => {
+    synRef.current = synthase;
+  }, [synthase]);
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -43,13 +49,25 @@ export function ProtonDamLab() {
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap gap-2">
-        <Button size="sm" variant={pumping ? "default" : "secondary"} onClick={() => setPumping((v) => !v)}>
+        <Button
+          size="sm"
+          variant={pumping ? "default" : "secondary"}
+          onClick={() => setPumping((v) => !v)}
+        >
           {pumping ? "Pumps on" : "Start pumps"}
         </Button>
-        <Button size="sm" variant={synthase ? "default" : "secondary"} onClick={() => setSynthase((v) => !v)}>
+        <Button
+          size="sm"
+          variant={synthase ? "default" : "secondary"}
+          onClick={() => setSynthase((v) => !v)}
+        >
           {synthase ? "Synthase open" : "Close synthase"}
         </Button>
-        <Button size="sm" variant={leaking ? "default" : "outline"} onClick={() => setLeaking((v) => !v)}>
+        <Button
+          size="sm"
+          variant={leaking ? "default" : "outline"}
+          onClick={() => setLeaking((v) => !v)}
+        >
           {leaking ? "Uncoupled" : "Uncouple"}
         </Button>
         <Button
@@ -69,16 +87,30 @@ export function ProtonDamLab() {
 
       <div className="overflow-hidden rounded-xl bg-background p-4 shadow-[var(--shadow-border)] sm:p-6">
         <svg viewBox="0 0 640 260" className="h-auto w-full" aria-hidden>
-          <text x="24" y="28" className="fill-subtle" fontSize="12">outside · H⁺</text>
+          <text x="24" y="28" className="fill-subtle" fontSize="12">
+            outside · H⁺
+          </text>
           {Array.from({ length: Math.round(protons) }).map((_, i) => (
-            <circle key={i} cx={40 + (i % 14) * 22} cy={48 + Math.floor(i / 14) * 18} r="5" className="fill-primary" />
+            <circle
+              key={i}
+              cx={40 + (i % 14) * 22}
+              cy={48 + Math.floor(i / 14) * 18}
+              r="5"
+              className="fill-primary"
+            />
           ))}
           <rect x="20" y="118" width="600" height="16" rx="4" className="fill-primary/70" />
           <rect x="110" y="104" width="72" height="44" rx="6" className="fill-card stroke-border" strokeWidth="1" />
-          <text x="146" y="130" textAnchor="middle" className="fill-foreground" fontSize="11">ETC</text>
+          <text x="146" y="130" textAnchor="middle" className="fill-foreground" fontSize="11">
+            ETC
+          </text>
           <rect x="400" y="104" width="96" height="44" rx="6" className="fill-card stroke-border" strokeWidth="1" />
-          <text x="448" y="130" textAnchor="middle" className="fill-foreground" fontSize="11">F₀F₁</text>
-          <text x="24" y="168" className="fill-subtle" fontSize="12">matrix</text>
+          <text x="448" y="130" textAnchor="middle" className="fill-foreground" fontSize="11">
+            F₀F₁
+          </text>
+          <text x="24" y="168" className="fill-subtle" fontSize="12">
+            matrix
+          </text>
           <text x="24" y="220" className="fill-muted-foreground" fontSize="13">
             {pumping ? "electrons falling · protons leaving" : "pumps idle"}
           </text>
@@ -108,11 +140,24 @@ export function ProtonDamLab() {
   );
 }
 
-function Stat({ label, value, warn }: { label: string; value: string; warn?: boolean }) {
+function Stat({
+  label,
+  value,
+  warn,
+}: {
+  label: string;
+  value: string;
+  warn?: boolean;
+}) {
   return (
     <div>
       <p className="text-xs font-medium uppercase tracking-wider text-subtle">{label}</p>
-      <p className={cn("mt-1 font-serif text-2xl tabular-nums tracking-tight", warn && "text-destructive")}>
+      <p
+        className={cn(
+          "mt-1 font-serif text-2xl tabular-nums tracking-tight",
+          warn && "text-destructive",
+        )}
+      >
         {value}
       </p>
     </div>

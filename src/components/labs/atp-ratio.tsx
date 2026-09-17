@@ -119,9 +119,30 @@ export function AtpRatioLab() {
       </div>
 
       <div className="grid gap-5 sm:grid-cols-3">
-        <SliderField label="ATP" unit="mM" value={atp} min={0.2} max={12} onChange={setAtp} />
-        <SliderField label="ADP" unit="mM" value={adp} min={0.05} max={6} onChange={setAdp} />
-        <SliderField label="Pi" unit="mM" value={pi} min={0.5} max={20} onChange={setPi} />
+        <SliderField
+          label="ATP"
+          unit="mM"
+          value={atp}
+          min={0.2}
+          max={12}
+          onChange={setAtp}
+        />
+        <SliderField
+          label="ADP"
+          unit="mM"
+          value={adp}
+          min={0.05}
+          max={6}
+          onChange={setAdp}
+        />
+        <SliderField
+          label="Pi"
+          unit="mM"
+          value={pi}
+          min={0.5}
+          max={20}
+          onChange={setPi}
+        />
       </div>
       <p className="text-sm tabular-nums text-muted-foreground">
         [ATP]/[ADP] = {ratio.toFixed(1)}
@@ -133,9 +154,19 @@ export function AtpRatioLab() {
 }
 
 function SliderField({
-  label, unit, value, min, max, onChange,
+  label,
+  unit,
+  value,
+  min,
+  max,
+  onChange,
 }: {
-  label: string; unit: string; value: number; min: number; max: number; onChange: (v: number) => void;
+  label: string;
+  unit: string;
+  value: number;
+  min: number;
+  max: number;
+  onChange: (v: number) => void;
 }) {
   return (
     <label className="block space-y-3">
@@ -145,7 +176,13 @@ function SliderField({
           {value.toFixed(2)} {unit}
         </span>
       </span>
-      <Slider min={min} max={max} step={0.05} value={[value]} onValueChange={(v) => onChange(v[0] ?? value)} />
+      <Slider
+        min={min}
+        max={max}
+        step={0.05}
+        value={[value]}
+        onValueChange={(v) => onChange(v[0] ?? value)}
+      />
     </label>
   );
 }

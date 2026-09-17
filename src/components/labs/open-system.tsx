@@ -41,6 +41,7 @@ function orderMetric(ps: Particle[], w: number) {
     }
   }
   if (n0 === 0) return 0;
+  // 1 = fully sorted, 0.5 = mixed, map to 0–1 with 0.5 as zero order
   const sep = left0 / n0;
   return Math.max(0, Math.min(1, Math.abs(sep - 0.5) * 2));
 }
@@ -103,10 +104,22 @@ export function OpenSystemLab() {
         }
         p.x += p.vx;
         p.y += p.vy;
-        if (p.x < 10) { p.x = 10; p.vx *= -0.9; }
-        if (p.x > w - 10) { p.x = w - 10; p.vx *= -0.9; }
-        if (p.y < 10) { p.y = 10; p.vy *= -0.9; }
-        if (p.y > h - 10) { p.y = h - 10; p.vy *= -0.9; }
+        if (p.x < 10) {
+          p.x = 10;
+          p.vx *= -0.9;
+        }
+        if (p.x > w - 10) {
+          p.x = w - 10;
+          p.vx *= -0.9;
+        }
+        if (p.y < 10) {
+          p.y = 10;
+          p.vy *= -0.9;
+        }
+        if (p.y > h - 10) {
+          p.y = h - 10;
+          p.vy *= -0.9;
+        }
       }
 
       ctx.clearRect(0, 0, w, h);
@@ -163,10 +176,21 @@ export function OpenSystemLab() {
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-center gap-2">
-        <Button size="sm" variant={open ? "default" : "secondary"} onClick={() => { setOpen(true); setFlux(true); }}>
+        <Button
+          size="sm"
+          variant={open ? "default" : "secondary"}
+          onClick={() => {
+            setOpen(true);
+            setFlux(true);
+          }}
+        >
           Open, fed
         </Button>
-        <Button size="sm" variant={!open ? "default" : "secondary"} onClick={() => setOpen(false)}>
+        <Button
+          size="sm"
+          variant={!open ? "default" : "secondary"}
+          onClick={() => setOpen(false)}
+        >
           Isolated
         </Button>
         {open ? (

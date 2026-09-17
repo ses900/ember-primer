@@ -85,7 +85,12 @@ export function RedoxTowerLab() {
                         : "hover:bg-secondary",
                   )}
                 >
-                  <span className={cn("size-2 shrink-0 rounded-full", selected ? "bg-primary" : "bg-border")} />
+                  <span
+                    className={cn(
+                      "size-2 shrink-0 rounded-full",
+                      selected ? "bg-primary" : "bg-border",
+                    )}
+                  />
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm text-foreground">{c.name}</span>
                     <span className="block text-xs text-subtle">{c.pair}</span>
